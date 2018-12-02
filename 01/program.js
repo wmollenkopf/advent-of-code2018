@@ -1,7 +1,8 @@
+console.time("executionTime");
 var fs = require("fs");
 var os = require("os"); // used to get the OS End of Line character(s)
 
-fs.readFile("input.txt", "utf8", function(err, data) {
+fs.readFile("input", "utf8", function (err, data) {
   if (err) {
     return console.log(err);
   }
@@ -10,6 +11,7 @@ fs.readFile("input.txt", "utf8", function(err, data) {
   var finalFreq = 0; // Result of summation of frequencies tuned
   var freqRepeat = [];
   var freqRepeatFirst;
+
   function checkForRepeat(inputIndex, array) {
     if (freqRepeat[finalFreq] == null) {
       //console.log("setting un-null for:",finalFreq);
@@ -46,3 +48,4 @@ fs.readFile("input.txt", "utf8", function(err, data) {
     console.log(`First repeat after looping ${fileLoopCounter} times was: `, freqRepeatFirst);
   }
 });
+console.timeEnd("executionTime");
