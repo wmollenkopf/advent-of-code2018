@@ -18,6 +18,7 @@ fs.readFile("input", "utf8", function (err, data) {
   var threeFlagCounter = 0;
 
   //console.log(arrayData);
+  for (var j = 0; j < arrayData.length; j++) {
     var sortedLine = arrayData[j].split('').sort();
     var twoFlag = false;
     var threeFlag = false;
