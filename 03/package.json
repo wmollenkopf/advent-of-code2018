@@ -1,0 +1,23 @@
+{
+  "name": "advent-of-code2018-01",
+  "version": "1.0.0",
+  "description": "Advent of Code 2018 from the site: https://adventofcode.com/2018",
+  "main": "program.js",
+  "scripts": {
+    "run": "node program.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmollenkopf/advent-of-code2018.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wmollenkopf/advent-of-code2018/issues"
+  },
+  "homepage": "https://github.com/wmollenkopf/advent-of-code2018#readme",
+  "dependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
