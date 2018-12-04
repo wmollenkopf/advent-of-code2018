@@ -23,6 +23,7 @@ fs.readFile("input", "utf8", function (err, data) {
       this.posY = parseInt(posY);
       this.width = parseInt(width);
       this.height = parseInt(height);
+      this.nonOverlapArea = 0;
     }
 
     getMaxDimension() {
@@ -32,6 +33,9 @@ fs.readFile("input", "utf8", function (err, data) {
       };
     }
 
+    getArea() {
+      return this.height * this.width;
+    }
     toString() {
       // TODO if needed
     }
@@ -111,9 +115,47 @@ fs.readFile("input", "utf8", function (err, data) {
     sumValue += thisLine.length;
   }
 
-  console.log(sumValue);
+  console.log(`The total area of overlapping square inches is:`,sumValue);
 
- 
+  // Part 2:
+  // Find out which ID doesn't ever overlap at all with anything else...
+  // Take the fabric2d array and remove any squares entirely that has more than 1 item.
+  // Compare the height * width sum (area) with the area (total sum of square) that the ID appears in the filtered fabric2d array
+  // If they're NOT equal (meaning overlap happened and now the id shows up less time in the array, remove it from the array)
+  // Might wanna collapse everything into a single 1d array since we only care about sums.
+
+  // First, filter out the duplicates
+  var fabric1DFiltered = [];
+  for (var i = 0; i < fabric2DArray.length; i++) {
+    var fabric2DArrayFiltered = fabric2DArray[i].filter(item => item.length == 1);
+
+    for (var j = 0; j < fabric2DArrayFiltered.length; j++) {
+      for (var k = 0; k < fabric2DArrayFiltered[j].length; k++) {
+        fabric1DFiltered.push(fabric2DArrayFiltered[j][k]);
+      }
+    }
+  }
+
+  //fabric1DFiltered.sort();
+  var idThatNeverOverlaps;
+  var claimLength = claimList.length;
+  // This takes a while to run so let's console.log every 50 records as a sort of loading...
+  for (var i = 0; i < claimLength; i++) {
+    var nonOverlapSum = fabric1DFiltered.filter(item => item == claimList[i].id).length;
+    fabric1DFiltered.filter(item => item != claimList[i].id);
+    if (nonOverlapSum == claimList[i].getArea()) {
+      console.log("Found it!");
+      idThatNeverOverlaps = claimList[i].id;
+      break;
+    }
+    if(i%50==0) {
+      var currentPercent = ((i / claimLength)*100).toFixed(2);
+      console.log(`${currentPercent}% complete...`);
+    }
+
+  }
+
+  console.log("The ID that never laps is:", idThatNeverOverlaps);
 
 
 });
